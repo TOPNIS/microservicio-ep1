@@ -1,0 +1,51 @@
+package cl.duocuc.microservicio_inventario.service.impl;
+
+import cl.duocuc.microservicio_inventario.model.Producto;
+import cl.duocuc.microservicio_inventario.repository.ProductoRepository;
+import cl.duocuc.microservicio_inventario.service.ProductoService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductoServiceImpl implements ProductoService {
+
+    private final ProductoRepository repository;
+
+    public ProductoServiceImpl(ProductoRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public List<Producto> listar() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Producto obtenerPorId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Producto crear(Producto producto) {
+        return repository.save(producto);
+    }
+
+    @Override
+    public Producto actualizar(Long id, Producto producto) {
+        Producto existente = repository.findById(id).orElse(null);
+        if (existente != null) {
+            existente.setNombre(producto.getNombre());
+            existente.setDescripcion(producto.getDescripcion());
+            existente.setCantidad(producto.getCantidad());
+            existente.setPrecio(producto.getPrecio());
+            return repository.save(existente);
+        }
+        return null;
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        repository.deleteById(id);
+    }
+}

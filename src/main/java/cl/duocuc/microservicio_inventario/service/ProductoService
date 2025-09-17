@@ -1,0 +1,13 @@
+package cl.duocuc.microservicio_inventario.service;
+
+import cl.duocuc.microservicio_inventario.model.Producto;
+
+import java.util.List;
+
+public interface ProductoService {
+    List<Producto> listar();
+    Producto obtenerPorId(Long id);
+    Producto crear(Producto producto);
+    Producto actualizar(Long id, Producto producto);
+    void eliminar(Long id);
+}

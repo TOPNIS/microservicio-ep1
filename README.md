@@ -21,3 +21,8 @@ Repositorio del microservicio base para la Evaluación Parcial 1 de Ingeniería 
 - [x] Documentación de endpoints básicos (listar estudiantes).  
 - [x] Actualización del `README.md` con instrucciones de ejecución y lineamientos.  
 - [x] Publicación de **Release v0.1.0** como primera versión estable.  
+ 
+## Pipeline CI/CD Configurado 
+- Build automatico 
+- Tests unitarios 
+- Analisis de codigo con SonarCloud 

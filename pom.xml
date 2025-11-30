@@ -12,7 +12,7 @@
 	<artifactId>microservicio_inventario</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>microservicio_inventario</name>
-	<description>Microservicio de gestión de inventario con Oracle DB</description>
+	<description>Microservicio de gestión de inventario con Oracle DB - EP3 con Observabilidad</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -38,6 +38,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!-- EP3: Actuator para métricas de observabilidad -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!-- EP3: Micrometer para exportar métricas a Prometheus -->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>

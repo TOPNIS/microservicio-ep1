@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: microservicio-inventario
+  labels:
+    app: microservicio-inventario
+spec:
+  selector:
+    matchLabels:
+      app: microservicio-inventario
+  endpoints:
+  - port: http
+    path: /actuator/prometheus
+    interval: 30s

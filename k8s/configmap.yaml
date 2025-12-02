@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database.url: "jdbc:oracle:thin:@//tu-oracle-host:1521/XEPDB1"
+  application.name: "Microservicio Inventario"
+  application.version: "2.0.0-EP3"

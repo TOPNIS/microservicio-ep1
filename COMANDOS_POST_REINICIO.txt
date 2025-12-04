@@ -1,0 +1,85 @@
+===============================================
+COMANDOS POST-REINICIO - MINIKUBE EP3
+===============================================
+
+PASO 1: VERIFICAR DOCKER
+-------------------------
+1. Abrir Docker Desktop (esperar que inicie completamente)
+2. Verificar en terminal:
+   docker --version
+   docker ps
+
+PASO 2: INSTALAR MINIKUBE (PowerShell como Administrador)
+----------------------------------------------------------
+New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force
+Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe' -UseBasicParsing
+
+PASO 3: AGREGAR AL PATH
+------------------------
+$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)
+if ($oldPath.Split(';') -inotcontains 'C:\minikube'){
+  [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)
+}
+
+PASO 4: INSTALAR KUBECTL
+-------------------------
+cd c:\minikube
+Invoke-WebRequest -OutFile kubectl.exe -Uri 'https://dl.k8s.io/release/v1.28.0/bin/windows/amd64/kubectl.exe'
+
+PASO 5: CERRAR Y ABRIR NUEVO POWERSHELL (Administrador)
+--------------------------------------------------------
+Verificar:
+minikube version
+kubectl version --client
+
+PASO 6: INICIAR MINIKUBE
+-------------------------
+minikube start --driver=docker
+(Esperar 3-5 minutos)
+
+PASO 7: VERIFICAR CLUSTER
+--------------------------
+kubectl cluster-info
+kubectl get nodes
+
+PASO 8: NAVEGAR AL PROYECTO
+----------------------------
+cd C:\Windows\System32\microservicio-ep1
+
+PASO 9: DESPLEGAR MICROSERVICIO
+--------------------------------
+kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/secret.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+
+PASO 10: VERIFICAR DEPLOYMENT
+------------------------------
+kubectl get pods
+kubectl get svc
+kubectl get deployments
+
+PASO 11: VER LOGS
+------------------
+kubectl logs -l app=microservicio-inventario
+
+PASO 12: DESCRIBIR POD
+----------------------
+kubectl describe pod -l app=microservicio-inventario
+
+===============================================
+CAPTURAS DE PANTALLA NECESARIAS:
+===============================================
+1. minikube status
+2. kubectl get nodes
+3. kubectl get pods
+4. kubectl get svc
+5. kubectl describe deployment microservicio-inventario
+6. kubectl logs de un pod
+
+===============================================
+DESPUÉS DE CAPTURAR SCREENSHOTS:
+===============================================
+Agregar las imágenes al repositorio y actualizar EVIDENCIAS_EP3.md
+
+===============================================
